@@ -1,0 +1,51 @@
+Assignment 3: Function Design and Modularization - Create a document that describes the design of two modular functions: one that returns the factorial of a number, and another that calculates the nth Fibonacci number. Include pseudocode and a brief explanation of how modularity in programming helps with code reuse and organization.
+
+
+1. Function: Factorial Calculation
+
+Purpose:
+Calculate the factorial of a given number.
+
+Input:
+
+An integer number n.
+Output:
+The factorial of n
+
+pseudocode:
+
+function factorial(n: integer) -> integer
+    if n equals 0
+        return 1
+    else
+        return n * factorial(n - 1)
+
+This function calculates the factorial of a given number n recursively. It first checks if n is equal to 0, in which case it returns 1 (since the factorial of 0 is defined as 1). Otherwise, it recursively calls itself with n - 1 and multiplies the result by n.
+
+
+2. Function: Fibonacci Number Calculation
+
+Purpose:
+Calculate the nth Fibonacci number.
+
+Input:
+
+An integer number n.
+Output:
+
+The nth Fibonacci number.
+Pseudocode:
+
+function fibonacci(n: integer) -> integer
+    if n equals 0
+        return 0
+    else if n equals 1
+        return 1
+    else
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+This function calculates the nth Fibonacci number recursively. It first checks if n is equal to 0 or 1, in which case it returns 0 or 1 respectively (since the Fibonacci sequence starts with 0 and 1). Otherwise, it recursively calls itself with n - 1 and n - 2, and returns the sum of the results.
+
+MODULARITY:
+Modularity in programming refers to the practice of breaking down a program into smaller, self-contained modules or functions.
+Modularity in programming promotes code reuse, organization, scalability, testing, and collaboration, leading to more efficient and maintainable software development.

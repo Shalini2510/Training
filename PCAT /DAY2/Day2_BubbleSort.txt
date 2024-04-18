@@ -1,0 +1,26 @@
+Assignment 1: Pseudocode and Flowchart for Sorting Algorithm - Write pseudocode and create a flowchart for a bubble sort algorithm. Provide a brief explanation of how the algorithm works and a simple array of integers to demonstrate a dry
+ run of your algorithm.
+
+
+Pseudocode:
+procedure bubbleSort(arr: array of items)
+    n = length(arr)
+    for i = 0 to n - 2
+        for j = 0 to n - i - 2
+            if arr[j] > arr[j+1]
+                swap(arr[j], arr[j+1])
+
+
+Explanation:
+
+1.The bubble sort algorithm works by repeatedly stepping through the list of elements to be sorted, comparing each pair of adjacent elements, and swapping them if they are in the wrong order. This process is repeated until the entire list is sorted.
+
+2.The outer loop (for i) iterates from the first element to the second last element of the array. It controls the number of passes needed to sort the entire array.
+
+3.The inner loop (for j) iterates from the first element to the element before the last sorted element. It compares adjacent elements and performs the swapping operation if necessary.
+
+4.Within the inner loop, if arr[j] is greater than arr[j+1], it means that the two adjacent elements are in the wrong order. In this case, the swap function is called to exchange their positions, placing the larger element towards the end of the array.
+
+5.After completing the inner loop for each pass of the outer loop, the largest unsorted element "bubbles up" to its correct position in the sorted array.
+
+6.This process is repeated until no more swaps are needed, indicating that the array is sorted in ascending order.

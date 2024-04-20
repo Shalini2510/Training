@@ -57,3 +57,7 @@ public class TwoSum {
 	}
 
 }
+
+/* OUTPUT: The Target is: 13
+Indices of the two numbers: 0, 6
+The numbers are: 2, 11*/

@@ -1,0 +1,1012 @@
+--Task 1: Data Types/Variables
+--Write a program that declares two integer variables, swaps their values without using a third variable, and prints the result.
+
+
+
+
+public class Main {
+   
+    public static void swapWithoutThirdVariable(int a, int b) {
+        System.out.println("Before swapping:");
+        System.out.println("a = " + a);
+        System.out.println("b = " + b);
+
+      
+        a = a + b;
+        b = a - b;
+        a = a - b;
+
+        System.out.println("\nAfter swapping:");
+        System.out.println("a = " + a);
+        System.out.println("b = " + b);
+    }
+
+   
+    public static void main(String[] args) {
+        // Declare two integer variables
+        int variable1 = 10;
+        int variable2 = 20;
+
+        
+        swapWithoutThirdVariable(variable1, variable2);
+    }
+}
+
+
+
+
+
+--Task 2: Operators
+--Create a program that simulates a simple calculator using command-line arguments to perform and print the result of addition, subtraction, multiplication, and          division..
+
+
+
+
+
+
+public class SimpleCalculator {
+    public static void main(String[] args) {
+        // Check if the correct number of arguments are provided
+        if (args.length != 3) {
+            System.out.println("Usage: java SimpleCalculator <operand1> <operator> <operand2>");
+            return;
+        }
+
+        // Parse the operands from command-line arguments
+        double operand1 = Double.parseDouble(args[0]);
+        String operator = args[1];
+        double operand2 = Double.parseDouble(args[2]);
+
+        // Perform the operation based on the operator
+        double result = 0.0;
+        switch (operator) {
+            case "+":
+                result = operand1 + operand2;
+                break;
+            case "-":
+                result = operand1 - operand2;
+                break;
+            case "*":
+                result = operand1 * operand2;
+                break;
+            case "/":
+                // Check if the second operand is not zero to avoid division by zero error
+                if (operand2 != 0) {
+                    result = operand1 / operand2;
+                } else {
+                    System.out.println("Error: Division by zero!");
+                    return;
+                }
+                break;
+            default:
+                System.out.println("Invalid operator! Please use one of: +, -, *, /");
+                return;
+        }
+
+        // Print the result
+        System.out.println("Result: " + result);
+    }
+}
+
+
+
+
+
+
+
+Task 3: Control Flow
+Write a Java program that reads an integer and prints whether it is a prime number using a for loop and if statements.
+
+
+
+
+import java.util.Scanner;
+
+public class PrimeNumberChecker {
+    public static void main(String[] args) {
+        // Create a Scanner object to read input from the user
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt the user to enter an integer
+        System.out.print("Enter an integer: ");
+        int number = scanner.nextInt();
+
+        // Close the Scanner object
+        scanner.close();
+
+        // Check if the number is prime
+        boolean isPrime = true;
+        if (number <= 1) {
+            isPrime = false;
+        } else {
+            for (int i = 2; i <= Math.sqrt(number); i++) {
+                if (number % i == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+        }
+
+        // Print whether the number is prime or not
+        if (isPrime) {
+            System.out.println(number + " is a prime number.");
+        } else {
+            System.out.println(number + " is not a prime number.");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+Task 4: Arrays - Declaration, Initialization, and Usage
+Create a program that declares an array of integers, initializes it with consecutive numbers, and prints the array in reverse order.
+
+
+public class ReverseArray {
+    public static void main(String[] args) {
+        // Declare and initialize an array of integers
+        int[] numbers = new int[10]; // You can adjust the size of the array as needed
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = i + 1; // Initialize with consecutive numbers starting from 1
+        }
+
+        // Print the original array
+        System.out.println("Original array:");
+        printArray(numbers);
+
+        // Reverse the array
+        reverseArray(numbers);
+
+        // Print the reversed array
+        System.out.println("\nArray in reverse order:");
+        printArray(numbers);
+    }
+
+    // Function to reverse an array of integers
+    public static void reverseArray(int[] arr) {
+        int start = 0;
+        int end = arr.length - 1;
+        while (start < end) {
+            // Swap elements at start and end indices
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            // Move to the next pair of elements
+            start++;
+            end--;
+        }
+    }
+
+    // Function to print an array of integers
+    public static void printArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println(); // Print a newline after printing the array
+    }
+}
+
+
+
+
+
+ 
+Task 5: Two-Sum Problem
+a) Given an array of integers, write a program that finds if there are two numbers that add up to a specific target. You may assume that each input would have exactly one solution, and you may not use the same element twice. Optimize the solution for time
+ complexity.
+
+
+import java.util.Arrays;
+
+public class TwoSum {
+    public static int[] findTwoSum(int[] nums, int target) {
+        // Sort the array in ascending order
+        Arrays.sort(nums);
+
+        // Initialize two pointers: one at the beginning and one at the end of the array
+        int left = 0;
+        int right = nums.length - 1;
+
+        // Iterate until the two pointers meet
+        while (left < right) {
+            // Calculate the sum of the numbers at the current positions
+            int sum = nums[left] + nums[right];
+
+            // If the sum is equal to the target, return the indices of the two numbers
+            if (sum == target) {
+                return new int[]{left, right};
+            }
+            // If the sum is less than the target, move the left pointer to the right
+            else if (sum < target) {
+                left++;
+            }
+            // If the sum is greater than the target, move the right pointer to the left
+            else {
+                right--;
+            }
+        }
+
+        // If no solution is found, return an empty array
+        return new int[]{};
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {2, 7, 11, 15};
+        int target = 9;
+
+        // Find the indices of two numbers that add up to the target
+        int[] result = findTwoSum(nums, target);
+
+        // Print the result
+        if (result.length == 2) {
+            System.out.println("Indices of the two numbers: " + result[0] + ", " + result[1]);
+            System.out.println("The numbers are: " + nums[result[0]] + ", " + nums[result[1]]);
+        } else {
+            System.out.println("No two numbers add up to the target.");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+ 
+              Task 6: Understanding Functions through Arrays
+              a) Write a recursive function named SumArray that calculates and returns the sum of elements in an array, demonstarte with example.
+
+
+
+
+public class SumArray {
+    public static int sumArray(int[] arr, int index) {
+        // Base case: if the index is equal to the length of the array, return 0
+        if (index == arr.length) {
+            return 0;
+        }
+        
+        // Recursive case: add the current element to the sum of the rest of the array
+        return arr[index] + sumArray(arr, index + 1);
+    }
+
+    public static void main(String[] args) {
+        // Example array
+        int[] array = {1, 2, 3, 4, 5};
+
+        // Calculate the sum of elements in the array
+        int sum = sumArray(array, 0);
+
+        // Print the result
+        System.out.println("Sum of elements in the array: " + sum);
+    }
+}
+
+
+
+
+
+
+ 
+Task 7: Array Sorting and Searching
+a) Implement a function called BruteForceSort that sorts an array using the brute force approach. Use this function to sort an array created with InitializeArray.
+
+
+
+
+
+
+import java.util.Arrays;
+
+public class BruteForceSort {
+    public static void bruteForceSort(int[] arr) {
+        int n = arr.length;
+        // Iterate over each element in the array
+        for (int i = 0; i < n - 1; i++) {
+            // Find the index of the minimum element in the unsorted part of the array
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            // Swap the minimum element with the current element
+            int temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+        }
+    }
+
+    public static void main(String[] args) {
+        // Create and initialize an array
+        int[] array = {5, 3, 8, 2, 7, 1};
+
+        // Sort the array using brute force approach
+        bruteForceSort(array);
+
+        // Print the sorted array
+        System.out.println("Sorted array: " + Arrays.toString(array));
+    }
+}
+
+
+
+
+
+
+
+
+b) Write a function named PerformLinearSearch that searches for a specific element in an array and returns the index of the element if found or -1 if not found.
+
+
+
+
+
+
+
+public class LinearSearch {
+    public static int performLinearSearch(int[] arr, int target) {
+        // Iterate over each element in the array
+        for (int i = 0; i < arr.length; i++) {
+            // Check if the current element is equal to the target
+            if (arr[i] == target) {
+                // Return the index of the element if found
+                return i;
+            }
+        }
+        // If the target is not found, return -1
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        // Example array
+        int[] array = {3, 6, 9, 12, 15};
+
+        // Target element to search for
+        int target = 12;
+
+        // Perform linear search
+        int index = performLinearSearch(array, target);
+
+        // Print the result
+        if (index != -1) {
+            System.out.println("Element " + target + " found at index " + index);
+        } else {
+            System.out.println("Element " + target + " not found in the array");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+ 
+Task 8: Advanced Array Operations
+a)  Implement a method SliceArray that takes an array, a starting index, and an end index, then returns a new array containing the elements from the start to the end index.
+
+
+
+
+
+
+import java.util.Arrays;
+
+public class ArraySlicer {
+    public static int[] sliceArray(int[] arr, int start, int end) {
+        // Check if the start index and end index are valid
+        if (start < 0 || end >= arr.length || start > end) {
+            // If not valid, return an empty array or throw an exception
+            return new int[0]; // You can also throw an IllegalArgumentException
+        }
+
+        // Calculate the length of the sliced array
+        int length = end - start + 1;
+
+        // Create a new array to store the sliced elements
+        int[] slicedArray = new int[length];
+
+        // Copy the elements from the original array to the sliced array
+        for (int i = 0; i < length; i++) {
+            slicedArray[i] = arr[start + i];
+        }
+
+        return slicedArray;
+    }
+
+    public static void main(String[] args) {
+        // Example array
+        int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+        // Start and end indices for slicing
+        int start = 2;
+        int end = 5;
+
+        // Slice the array
+        int[] slicedArray = sliceArray(array, start, end);
+
+        // Print the sliced array
+        System.out.println("Sliced array: " + Arrays.toString(slicedArray));
+    }
+}
+
+
+
+
+
+
+
+
+
+
+b) Create a recursive function to find the nth element of a Fibonacci sequence and store the first n elements in an array.
+
+
+
+
+
+
+
+
+
+
+
+import java.util.Arrays;
+
+public class Fibonacci {
+    // Recursive function to find the nth Fibonacci number
+    public static int fibonacci(int n) {
+        // Base cases: when n is 0 or 1
+        if (n <= 1) {
+            return n;
+        }
+        // Recursive case: when n is greater than 1
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
+    // Function to generate the first n Fibonacci numbers and store them in an array
+    public static int[] generateFibonacciArray(int n) {
+        int[] fibonacciArray = new int[n];
+        // Iterate over each index in the array and calculate the corresponding Fibonacci number
+        for (int i = 0; i < n; i++) {
+            fibonacciArray[i] = fibonacci(i);
+        }
+        return fibonacciArray;
+    }
+
+    public static void main(String[] args) {
+        // Define the value of n
+        int n = 10; // Change this value to generate a different number of Fibonacci numbers
+
+        // Generate the first n Fibonacci numbers and store them in an array
+        int[] fibonacciArray = generateFibonacciArray(n);
+
+        // Print the Fibonacci array
+        System.out.println("First " + n + " Fibonacci numbers: " + Arrays.toString(fibonacciArray));
+
+        // Find and print the nth Fibonacci number
+        int nthElement = fibonacci(n - 1);
+        System.out.println("The " + n + "th Fibonacci number is: " + nthElement);
+    }
+}
+
+
+
+
+
+
+
+
+ 
+Task 9: String Operations
+Write a method that takes two strings, concatenates them, reverses the result, and then extracts the middle substring of the given length. Ensure your method handles edge cases, such as an empty string or a substring length larger than the concatenated
+ string.
+
+
+
+
+
+
+public class StringManipulation {
+    public static String extractMiddleSubstring(String str1, String str2, int length) {
+        // Concatenate the two strings
+        String concatenatedString = str1.concat(str2);
+
+        // Reverse the concatenated string
+        String reversedString = new StringBuilder(concatenatedString).reverse().toString();
+
+        // Calculate the length of the reversed string
+        int reversedLength = reversedString.length();
+
+        // Check for edge cases
+        if (reversedLength == 0 || length > reversedLength) {
+            return ""; // Return an empty string if the length is larger than the reversed string or if the reversed string is empty
+        } else if (length == reversedLength) {
+            return reversedString; // Return the reversed string if the length is equal to the reversed string length
+        }
+
+        // Calculate the start index for the middle substring
+        int startIndex = (reversedLength - length) / 2;
+
+        // Extract the middle substring of the specified length
+        String middleSubstring = reversedString.substring(startIndex, startIndex + length);
+
+        return middleSubstring;
+    }
+
+    public static void main(String[] args) {
+        // Test cases
+        String str1 = "Hello";
+        String str2 = "World";
+        int length = 5;
+
+        // Call the method and print the result
+        String result = extractMiddleSubstring(str1, str2, length);
+        System.out.println("Middle substring of length " + length + ": " + result);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+Day 4 and Day 5
+Task 1: Constructors
+Implement a Matrix class that has a constructor which initializes the dimensions of a matrix and a method to fill the matrix with values.
+
+
+
+
+public class Matrix {
+    private int rows;
+    private int columns;
+    private int[][] data;
+
+    // Constructor to initialize the dimensions of the matrix
+    public Matrix(int rows, int columns) {
+        this.rows = rows;
+        this.columns = columns;
+        this.data = new int[rows][columns];
+    }
+
+    // Method to fill the matrix with values
+    public void fillMatrix(int[][] values) {
+        // Check if the provided values match the dimensions of the matrix
+        if (values.length != rows || values[0].length != columns) {
+            System.out.println("Error: Invalid dimensions of values array.");
+            return;
+        }
+
+        // Copy the values to the matrix
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                data[i][j] = values[i][j];
+            }
+        }
+    }
+
+    // Method to print the matrix
+    public void printMatrix() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                System.out.print(data[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        // Create a matrix with dimensions 3x3
+        Matrix matrix = new Matrix(3, 3);
+
+        // Fill the matrix with values
+        int[][] values = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+        matrix.fillMatrix(values);
+
+        // Print the matrix
+        System.out.println("Matrix:");
+        matrix.printMatrix();
+    }
+}
+
+
+
+
+
+
+
+
+
+ 
+Task 2: Inheritance
+Create a Shape class with a method area() and extend it with Circle and Rectangle classes overriding the area() method appropriately.
+
+
+
+
+
+
+
+
+public class Shape {
+    public double area() {
+        return 0; // Default implementation, overridden by subclasses
+    }
+}
+
+public class Circle extends Shape {
+    private double radius;
+
+    // Constructor
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    // Override the area() method for Circle
+    @Override
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+public class Rectangle extends Shape {
+    private double width;
+    private double height;
+
+    // Constructor
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    // Override the area() method for Rectangle
+    @Override
+    public double area() {
+        return width * height;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create objects of Circle and Rectangle
+        Circle circle = new Circle(5);
+        Rectangle rectangle = new Rectangle(4, 6);
+
+        // Calculate and print the areas
+        System.out.println("Area of Circle: " + circle.area());
+        System.out.println("Area of Rectangle: " + rectangle.area());
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+Task 3: Packages/Classpath
+Create a package com.math.operations and include classes for various arithmetic operations. Demonstrate how to compile and run these using the classpath.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+Task 4: Basic Exception Handling
+Write a program that attempts to divide by zero, catches the ArithmeticException, and provides a custom error message.
+
+
+
+
+
+public class DivideByZero{
+    public static void main(String[] args) {
+        try {
+            // Attempt to divide by zero
+            int result = divide(10, 0);
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            // Catch the ArithmeticException and provide a custom error message
+            System.out.println("Error: Division by zero is not allowed.");
+        }
+    }
+
+    public static int divide(int dividend, int divisor) {
+        // Check if the divisor is zero
+        if (divisor == 0) {
+            // Throw an ArithmeticException if attempting to divide by zero
+            throw new ArithmeticException("Division by zero");
+        }
+        // Otherwise, perform the division and return the result
+        return dividend / divisor;
+    }
+}
+
+
+
+
+
+
+
+
+
+1) Create a CustomStack class with operations Push, Pop, Peek, and IsEmpty. Demonstrate its LIFO behavior by pushing integers onto the stack, then popping and displaying them until the stack is empty.
+
+
+
+
+
+
+
+import java.util.ArrayList;
+import java.util.EmptyStackException;
+import java.util.List;
+
+public class CustomStack {
+    private List<Integer> stack;
+
+    public CustomStack() {
+        stack = new ArrayList<>();
+    }
+
+    // Push operation: Add an element to the top of the stack
+    public void push(int value) {
+        stack.add(value);
+    }
+
+    // Pop operation: Remove and return the top element of the stack
+    public int pop() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return stack.remove(stack.size() - 1);
+    }
+
+    // Peek operation: Return the top element of the stack without removing it
+    public int peek() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return stack.get(stack.size() - 1);
+    }
+
+    // Check if the stack is empty
+    public boolean isEmpty() {
+        return stack.isEmpty();
+    }
+
+    public static void main(String[] args) {
+        // Create a CustomStack object
+        CustomStack stack = new CustomStack();
+
+        // Push integers onto the stack
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+
+        // Pop and display elements until the stack is empty (LIFO behavior)
+        System.out.println("Popping elements from the stack:");
+        while (!stack.isEmpty()) {
+            System.out.println("Popped: " + stack.pop());
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+2) Develop a CustomQueue class with methods for Enqueue, Dequeue, Peek, and IsEmpty. Show how your queue can handle different data types by enqueuing strings and integers, then dequeuing and displaying them to confirm FIFO order.
+
+
+
+
+
+
+
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.NoSuchElementException;
+
+public class CustomQueue<T> {
+    private Queue<T> queue;
+
+    public CustomQueue() {
+        queue = new LinkedList<>();
+    }
+
+    // Enqueue operation: Add an element to the end of the queue
+    public void enqueue(T value) {
+        queue.offer(value);
+    }
+
+    // Dequeue operation: Remove and return the element at the front of the queue
+    public T dequeue() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Queue is empty");
+        }
+        return queue.poll();
+    }
+
+    // Peek operation: Return the element at the front of the queue without removing it
+    public T peek() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Queue is empty");
+        }
+        return queue.peek();
+    }
+
+    // Check if the queue is empty
+    public boolean isEmpty() {
+        return queue.isEmpty();
+    }
+
+    public static void main(String[] args) {
+        // Create a CustomQueue object to store strings
+        CustomQueue<String> stringQueue = new CustomQueue<>();
+
+        // Enqueue strings
+        stringQueue.enqueue("Hello");
+        stringQueue.enqueue("World");
+
+        // Dequeue and display strings
+        System.out.println("Dequeuing strings:");
+        while (!stringQueue.isEmpty()) {
+            System.out.println("Dequeued: " + stringQueue.dequeue());
+        }
+
+        // Create a CustomQueue object to store integers
+        CustomQueue<Integer> integerQueue = new CustomQueue<>();
+
+        // Enqueue integers
+        integerQueue.enqueue(1);
+        integerQueue.enqueue(2);
+        integerQueue.enqueue(3);
+
+        // Dequeue and display integers
+        System.out.println("\nDequeuing integers:");
+        while (!integerQueue.isEmpty()) {
+            System.out.println("Dequeued: " + integerQueue.dequeue());
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+ 
+Day6:
+Task 1: List interface
+Implement a method that takes a List as an argument and removes every second element from the list, then prints the resulting list.
+
+
+
+
+
+
+
+import java.util.List;
+
+public class ListManipulation {
+    public static void removeEverySecondElement(List<?> list) {
+        // Iterate over the list backwards and remove every second element
+        for (int i = list.size() - 1; i >= 0; i -= 2) {
+            list.remove(i);
+        }
+        // Print the resulting list
+        System.out.println("List after removing every second element: " + list);
+    }
+
+    public static void main(String[] args) {
+        // Example list
+        List<Integer> myList = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        // Call the method to remove every second element
+        removeEverySecondElement(myList);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+Task 8: Advanced Array Operations
+a)  Implement a method SliceArray that takes an array, a starting index, and an end index, then returns a new array containing the elements from the start to the end index.
+b) Create a recursive function to find the nth element of a Fibonacci sequence and store the first n elements in an array.
+ 
+Task 9: String Operations
+Write a method that takes two strings, concatenates them, reverses the result, and then extracts the middle substring of the given length. Ensure your method handles edge cases, such as an empty string or a substring length larger than the concatenated
+ string.
+ 
+Day 4 and Day 5
+Task 1: Constructors
+Implement a Matrix class that has a constructor which initializes the dimensions of a matrix and a method to fill the matrix with values.
+ 
+Task 2: Inheritance
+Create a Shape class with a method area() and extend it with Circle and Rectangle classes overriding the area() method appropriately.
+ 
+Task 3: Packages/Classpath
+Create a package com.math.operations and include classes for various arithmetic operations. Demonstrate how to compile and run these using the classpath.
+ 
+Task 4: Basic Exception Handling
+Write a program that attempts to divide by zero, catches the ArithmeticException, and provides a custom error message.
+1) Create a CustomStack class with operations Push, Pop, Peek, and IsEmpty. Demonstrate its LIFO behavior by pushing integers onto the stack, then popping and displaying them until the stack is empty.
+2) Develop a CustomQueue class with methods for Enqueue, Dequeue, Peek, and IsEmpty. Show how your queue can handle different data types by enqueuing strings and integers, then dequeuing and displaying them to confirm FIFO order.
+ 
+Day6:
+Task 1: List interface
+Implement a method that takes a List as an argument and removes every second element from the list, then prints the resulting list.
+
+
+

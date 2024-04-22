@@ -1,0 +1,80 @@
+pseudo code:
+
+function fibonacci(n)
+    if n <= 1
+        return n
+    else
+        return fibonacci(n-1) + fibonacci(n-2)
+
+
+Recursive aaproach:
+
+public class Fibonacci {
+    public static int fibonacci(int n) {
+        if (n <= 1) {
+            return n;
+        } else {
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+    }
+
+    public static void main(String[] args) {
+        int n = 10; // Change n to any positive integer
+        System.out.println("The " + n + "th Fibonacci number is: " + fibonacci(n));
+    }
+}
+
+
+Iterative Approach:
+
+public class Fibonacci {
+    public static int fibonacci(int n) {
+        if (n <= 1) {
+            return n;
+        }
+
+        int prev = 0;
+        int curr = 1;
+        for (int i = 2; i <= n; i++) {
+            int temp = curr;
+            curr += prev;
+            prev = temp;
+        }
+        return curr;
+    }
+
+    public static void main(String[] args) {
+        int n = 10; // Change n to any positive integer
+        System.out.println("The " + n + "th Fibonacci number is: " + fibonacci(n));
+    }
+}
+
+
+Efficiency of the recursive approach using Big O notation:
+
+Time complexity: The time complexity of the recursive Fibonacci function is O(2^n).
+This is because each recursive call branches into two recursive calls (fibonacci(n - 1) and fibonacci(n - 2)),
+resulting in a binary tree-like structure with an exponential number of nodes.
+This makes the recursive approach highly inefficient for large values of n.
+
+Space complexity: The space complexity of the recursive Fibonacci function is O(n).
+This is because the function call stack grows linearly with the input size (n),
+as each recursive call consumes stack space until the base case is reached. 
+However, this linear space complexity does not fully compensate for the exponential time complexity, 
+making the recursive approach impractical for large values of n.
+
+Efficiency of the Iterative approach using Big O notation:
+
+Time complexity: The time complexity of the iterative Fibonacci function is O(n).
+This is because the function iterates through the loop n times, performing constant-time operations in each iteration.
+The iterative approach is much more efficient than the recursive approach, especially for large values of n.
+
+Space complexity: The space complexity of the iterative Fibonacci function is O(1).
+This is because the function only uses a constant amount of space to store the previous and current Fibonacci numbers, regardless of the input size (n). 
+The iterative approach is more space-efficient than the recursive approach, especially for large values of n.
+
+In summary, the recursive approach to calculate Fibonacci numbers has exponential time complexity and linear space complexity,
+making it highly inefficient for large values of n.
+On the other hand, the iterative approach has linear time complexity and constant space complexity, 
+making it much more efficient, especially for large values of n. 
+Therefore, the iterative approach is preferred over the recursive approach for calculating Fibonacci numbers.
